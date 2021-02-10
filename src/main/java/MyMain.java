@@ -32,7 +32,30 @@ public class MyMain {
      // You may assume arr1 and arr2 are the same length
     public static int[] merge(int[] arr1, int[] arr2) { 
         // YOUR CODE HERE
-        return null;
+        int[] fin = new int[arr1.length * 2];
+        return mergeRec(arr1, arr2, 0, 0, fin);
+    }
+    public static int[] mergeRec(int[] arr1, int[] arr2, int i, int j, int[] fin){
+        if (j == arr2.length && i == arr1.length){
+            return fin;
+        }
+        if (i == arr1.length){
+            fin[i + j] = arr2[j];
+            return mergeRec(arr1, arr2, i, j + 1, fin);
+        }
+        if (j == arr2.length){
+            fin[i + j] = arr1[i];
+            return mergeRec(arr1, arr2, i + 1, j, fin);
+        }
+        if (arr1[i] >= arr2[j]){
+            fin[i + j] = arr2[j];
+            return mergeRec(arr1, arr2, i, j + 1, fin);
+        }
+        fin[i + j] = arr1[i];
+        return mergeRec(arr1, arr2, i + 1, j, fin);
+        
+
+        
     }
 
     public static void main(String[] args) {
